@@ -38,14 +38,14 @@ public class HttpServer {
     }
 
     public static void main(String[] args) {
+
         ExecutorService threadPool = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
         while(true){
             try {
-                System.out.println("Waiting for client to connect.");
                 Socket socket = HttpServer.getInstance().acceptRequest();
                 System.out.println("Connected to:" + socket.getInetAddress());
-//                threadPool.submit(new ResponderThread(socket));
-                new ResponderThread(socket).run();
+                threadPool.submit(new ResponderThread(socket));
+//                new ResponderThread(socket).run();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -59,6 +59,7 @@ public class HttpServer {
     }
 
     public Socket acceptRequest() throws IOException {
+        System.out.println("Waiting for client to connect.");
         return server.accept();
     }
 }

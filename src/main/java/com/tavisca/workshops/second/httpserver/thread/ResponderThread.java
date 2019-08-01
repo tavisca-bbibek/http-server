@@ -12,47 +12,49 @@ import com.tavisca.workshops.second.httpserver.util.ResourceHandler;
 import java.io.*;
 import java.net.Socket;
 import java.nio.ByteBuffer;
-import java.util.Arrays;
 
 public class ResponderThread implements Runnable {
-    String requestString;
     Socket client;
 
     public ResponderThread(Socket client) {
         this.client = client;
     }
 
-    private void readRequest() {
+    @Override
+    public void run() {
+        InputStream requestStream = null;
+        OutputStream responseStream = null;
         try {
-            BufferedReader clientReader = new BufferedReader(new InputStreamReader(client.getInputStream()));
-            StringBuilder requestStringBuilder = new StringBuilder();
-            String line;
-            while (!(line = clientReader.readLine()).isEmpty()) {
-                System.out.println(line);
-                requestStringBuilder.append(line)
-                        .append('\n');
-            }
-
-            requestString = requestStringBuilder.toString();
-            System.out.println("--------RequestString-------");
-            System.out.println(requestStringBuilder.toString());
-            System.out.println("----------------------------");
+            requestStream = client.getInputStream();
+            responseStream = client.getOutputStream();
+            String requestString = readRequest(requestStream);
+            writeResponse(requestString, responseStream);
         } catch (IOException e) {
             System.out.println(e.getMessage());
+        } finally {
+               try{
+                   requestStream.close();
+                   responseStream.close();
+               }catch (IOException e){
+                   System.out.println(e.getMessage());
+               }
         }
     }
 
-    @Override
-    public void run() {
-        readRequest();
-        writeResponse();
+    private String readRequest(InputStream requestStream) throws IOException {
+        int size = requestStream.available();
+        byte[] buffer = new byte[size];
+        requestStream.readNBytes(buffer, 0, size);
+
+        System.out.println(Thread.currentThread().getId() + "--------RequestString-------");
+        System.out.write(buffer);
+
+        return new String(buffer);
     }
 
-    private void writeResponse() {
+    private void writeResponse(String requestString, OutputStream responseStream) throws IOException {
         byte[] response = null;
-        PrintStream responseStream = null;
         try {
-            responseStream = new PrintStream(client.getOutputStream());
             HttpRequest request = HttpRequestParser.parse(requestString);
             switch (request.getType()) {
                 case GET:
@@ -62,24 +64,17 @@ public class ResponderThread implements Runnable {
             }
         } catch (HttpRequestParseException e) {
             response = respondClientError();
-            try {
-                responseStream.write(response);
-            } catch (IOException ex) {
-                System.out.println(ex.getMessage());
-            }
+            responseStream.write(response);
             responseStream.flush();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
         } finally {
-            System.out.println("---------Response---------");
-            System.out.println(response);
-            System.out.println("--------------------------");
+            System.out.println(Thread.currentThread().getId() + "---------Response---------");
+            System.out.write(response);
+            System.out.println(Thread.currentThread().getId() + "--------------------------");
 
             if (response != null)
                 responseStream.close();
-            System.out.println("---------Served---------");
+            System.out.println(Thread.currentThread().getId() + "---------Served---------");
         }
-
     }
 
     private byte[] respondGetRequest(HttpRequest request) {
@@ -92,7 +87,8 @@ public class ResponderThread implements Runnable {
                 try {
                     String mimeType = ResourceHandler.getMimeType(resource);
                     byte[] responseBody = FileHandler.readFile(resource);
-                    String responseHeader = HeaderGenerator.generate(request.getProtocol(), 200, responseBody.length, mimeType);
+                    String responseHeader = HeaderGenerator.generate(request.getProtocol(),
+                            200, responseBody.length, mimeType);
                     return combineArrays(responseHeader.getBytes(), responseBody);
                 } catch (InvalidResourceFormatException e) {
                     throw new FileNotFoundException();
@@ -124,13 +120,13 @@ public class ResponderThread implements Runnable {
     }
 
     private byte[] respondServerError(HttpRequest request) {
-        String responseBody = request.getResource() + " - Does Not Exist";
+        String responseBody = request.getResource() + " - Does Not Exist\n";
         String responseHeader = HeaderGenerator.generate(request.getProtocol(), 500, responseBody.length(), "plain/text");
         return (responseHeader + responseBody).getBytes();
     }
 
     private byte[] respondClientError() {
-        String responseBody = "Bad Request - You ugly man.";
+        String responseBody = "Bad Request - You ugly man.\n";
         String responseHeader = HeaderGenerator.generate("HTTP/1.1", 400, responseBody.length(), "text/plain");
         return (responseHeader + responseBody).getBytes();
     }
