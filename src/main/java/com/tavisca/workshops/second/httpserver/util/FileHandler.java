@@ -7,11 +7,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class FileHandler {
-    public static String readFile(String fileName) throws FileNotFoundException {
+    public static byte[] readFile(String fileName) throws FileNotFoundException {
         String filePath = HttpServer.rootDirectory + '/' + fileName;
         FileInputStream fileInputStream = new FileInputStream(filePath);
         try {
-            return new String(fileInputStream.readAllBytes());
+            return fileInputStream.readAllBytes();
         } catch (IOException e) {
             return null;
         }

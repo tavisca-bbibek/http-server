@@ -3,32 +3,40 @@ package com.tavisca.workshops.second.httpserver.thread;
 import com.tavisca.workshops.second.httpserver.HttpRequestParser;
 import com.tavisca.workshops.second.httpserver.HttpServer;
 import com.tavisca.workshops.second.httpserver.exception.HttpRequestParseException;
+import com.tavisca.workshops.second.httpserver.exception.InvalidResourceFormatException;
 import com.tavisca.workshops.second.httpserver.model.HttpRequest;
 import com.tavisca.workshops.second.httpserver.util.FileHandler;
 import com.tavisca.workshops.second.httpserver.HeaderGenerator;
+import com.tavisca.workshops.second.httpserver.util.ResourceHandler;
 
 import java.io.*;
 import java.net.Socket;
+import java.nio.ByteBuffer;
+import java.util.Arrays;
 
 public class ResponderThread implements Runnable {
     String requestString;
-    PrintStream responseStream;
+    Socket client;
 
     public ResponderThread(Socket client) {
+        this.client = client;
+    }
+
+    private void readRequest() {
         try {
             BufferedReader clientReader = new BufferedReader(new InputStreamReader(client.getInputStream()));
             StringBuilder requestStringBuilder = new StringBuilder();
             String line;
-            while (!(line = clientReader.readLine()).isEmpty())
+            while (!(line = clientReader.readLine()).isEmpty()) {
+                System.out.println(line);
                 requestStringBuilder.append(line)
                         .append('\n');
+            }
 
             requestString = requestStringBuilder.toString();
             System.out.println("--------RequestString-------");
             System.out.println(requestStringBuilder.toString());
             System.out.println("----------------------------");
-
-            responseStream = new PrintStream(client.getOutputStream());
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
@@ -36,40 +44,59 @@ public class ResponderThread implements Runnable {
 
     @Override
     public void run() {
-//        testResponse();
+        readRequest();
+        writeResponse();
+    }
 
-        HttpRequest request;
-        String response = "";
+    private void writeResponse() {
+        byte[] response = null;
+        PrintStream responseStream = null;
         try {
-            request = HttpRequestParser.parse(requestString);
+            responseStream = new PrintStream(client.getOutputStream());
+            HttpRequest request = HttpRequestParser.parse(requestString);
             switch (request.getType()) {
                 case GET:
                     response = respondGetRequest(request);
+                    responseStream.write(response);
+                    responseStream.flush();
             }
         } catch (HttpRequestParseException e) {
             response = respondClientError();
+            try {
+                responseStream.write(response);
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
+            }
+            responseStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            System.out.println("---------Response---------");
+            System.out.println(response);
+            System.out.println("--------------------------");
+
+            if (response != null)
+                responseStream.close();
+            System.out.println("---------Served---------");
         }
 
-        responseStream.print(response);
-        System.out.println("---------Response---------");
-        System.out.println(response);
-        System.out.println("--------------------------");
-
-        responseStream.flush();
-        responseStream.close();
-        System.out.println("---------Served---------");
     }
 
-    private String respondGetRequest(HttpRequest request) {
+    private byte[] respondGetRequest(HttpRequest request) {
         String resource = request.getResource();
         if (resource.equals("")) {
             request.setResource("index.html");
             return respondGetRequest(request);
         } else {
             try {
-                String responseBody = FileHandler.readFile(resource);
-                String responseHeader = HeaderGenerator.generate(request.getProtocol(), 200, responseBody.length(), "text/html");
-                return responseHeader + responseBody;
+                try {
+                    String mimeType = ResourceHandler.getMimeType(resource);
+                    byte[] responseBody = FileHandler.readFile(resource);
+                    String responseHeader = HeaderGenerator.generate(request.getProtocol(), 200, responseBody.length, mimeType);
+                    return combineArrays(responseHeader.getBytes(), responseBody);
+                } catch (InvalidResourceFormatException e) {
+                    throw new FileNotFoundException();
+                }
             } catch (FileNotFoundException e) {
                 System.out.println(e.getMessage());
                 return respondFileNotFound(request);
@@ -77,55 +104,34 @@ public class ResponderThread implements Runnable {
         }
     }
 
-    private String respondFileNotFound(HttpRequest request) {
-        String responseBody = null;
+    private byte[] combineArrays(byte[] arr1, byte[] arr2) {
+        byte[] combined = new byte[arr1.length + arr2.length];
+        ByteBuffer buffer = ByteBuffer.wrap(combined);
+        buffer.put(arr1)
+                .put(arr2);
+        return combined;
+    }
+
+    private byte[] respondFileNotFound(HttpRequest request) {
+        byte[] responseBody;
         try {
             responseBody = FileHandler.readFile(HttpServer.responsesDirectory + "/" + HttpServer.responsesDirectory + "/" + "fileNotFound.html");
         } catch (FileNotFoundException e) {
-           return respondServerError(request);
+            return respondServerError(request);
         }
-        String responseHeader = HeaderGenerator.generate(request.getProtocol(), 200, responseBody.length(), "text/html");
-        return  responseHeader + responseBody;
+        String responseHeader = HeaderGenerator.generate(request.getProtocol(), 200, responseBody.length, "text/html");
+        return (responseHeader + responseBody).getBytes();
     }
 
-    private String respondServerError(HttpRequest request) {
+    private byte[] respondServerError(HttpRequest request) {
         String responseBody = request.getResource() + " - Does Not Exist";
         String responseHeader = HeaderGenerator.generate(request.getProtocol(), 500, responseBody.length(), "plain/text");
-        return responseHeader + responseBody;
+        return (responseHeader + responseBody).getBytes();
     }
 
-    private String respondClientError() {
-        //TODO: respond clientError
-        return null;
+    private byte[] respondClientError() {
+        String responseBody = "Bad Request - You ugly man.";
+        String responseHeader = HeaderGenerator.generate("HTTP/1.1", 400, responseBody.length(), "text/plain");
+        return (responseHeader + responseBody).getBytes();
     }
-
-   /* private void testResponse() {
-        //Response header
-        StringBuilder headerBuilder = new StringBuilder();
-        headerBuilder.append("HTTP/1.1 200 OK\n")
-                .append("Date: Mon, 27 Jul 2009 12:28:53 GMT\n")
-                .append("Server: Custom-Server/1.0\n");
-
-        //Response body
-        byte[] responseBody;
-        try {
-            responseBody = FileHandler.readFile("index.html");
-        } catch (FileNotFoundException e) {
-            try {
-                responseBody = FileHandler.readFile(HttpServer.responsesDirectory + "/" + "fileNotFound.html");
-            } catch (FileNotFoundException ex) {
-                responseBody = "File Not Found".getBytes();
-            }
-        }
-        headerBuilder.append("Content-Length: " + responseBody.length + '\n')
-                .append("Connection: Closed\n")
-                .append("Content-Type: text/html\n");
-
-        System.out.println("--------Response-------");
-        System.out.println(headerBuilder.toString());
-        System.out.println(new String(responseBody));
-        System.out.println("----------------------------");
-
-        responseStream.print(new String(responseBody));
-    }*/
 }
