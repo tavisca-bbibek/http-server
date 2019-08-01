@@ -1,25 +1,53 @@
 package com.tavisca.workshops.second.httpserver;
 
-import com.tavisca.workshops.second.httpserver.thread.RequestHandler;
+import com.tavisca.workshops.second.httpserver.exception.InvalidResourceFormatException;
+import com.tavisca.workshops.second.httpserver.thread.RequestHandlerTask;
+import com.tavisca.workshops.second.httpserver.util.ResourcePathParser;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Server {
     private static final int PORT = 80;
-    public static final String rootDirectory = "www";
-    public static final String responsesDirectory = "Responses";
+    public static final String DIRECTORY_ROOT = "www";
+    public static final String DIRECTORY_LOG = "logs";
+    public static final String FILE_DEFAULT = "index.html";
+
+    public static final int THREAD_POOL_SIZE = 100;
+
     public static final Map<Integer, String> statusCodeToStringMap = Map.of(
             200, "OK",
             400, "Bad Request",
             404, "Not Found",
             500, "Internal Server Error");
 
-    public static final int THREAD_POOL_SIZE = 10;
+    public static final Map<String, String> extensionToMimeMap;
+
+    static {
+        extensionToMimeMap = new HashMap<String, String>() {{
+            put("html", "text/html");
+            put("htm", "text/html");
+            put("js", "text/text/javascript");
+            put("css", "text/css");
+            put("jpeg", "image/jpeg");
+            put("jpg", "image/jpeg");
+            put("png", "image/png");
+            put("ico", "image/x-icon");
+            put("txt", "plain/text");
+            put("otf", "font/otf");
+            put("ttf", "font/ttf");
+            put("svg", "image/svg+xml");
+            put("eot", "application/vnd.ms-fontobject");
+            put("woff", "font/woff");
+            put("woff2", "font/woff2");
+        }};
+    }
+
     public ServerSocket server = null;
     private static Server instance = null;
 
@@ -34,11 +62,11 @@ public class Server {
 
     public static void main(String[] args) {
         ExecutorService threadPool = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
-        while(true){
+        while (true) {
             try {
                 Socket socket = Server.getInstance().acceptRequest();
-                System.out.println("Connected to:" + socket.getInetAddress());
-                threadPool.submit(new RequestHandler(socket));
+                //TODO: Log request client.
+                threadPool.submit(new RequestHandlerTask(socket));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -52,7 +80,10 @@ public class Server {
     }
 
     public Socket acceptRequest() throws IOException {
-        System.out.println("Waiting for client to connect.");
         return server.accept();
+    }
+
+    public static String getMimeType(String resource) throws InvalidResourceFormatException {
+        return extensionToMimeMap.get(ResourcePathParser.parseExtension(resource));
     }
 }

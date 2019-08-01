@@ -1,0 +1,9 @@
+/.gradle
+/.idea
+/.project
+/.classpath
+/target
+/**/*.class
+/**/*.swp
+/build
+/www

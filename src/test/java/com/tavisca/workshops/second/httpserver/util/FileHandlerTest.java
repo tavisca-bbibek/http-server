@@ -13,19 +13,19 @@ public class FileHandlerTest {
 
     @Test
     void canReadContentsOfTheFile() {
-        String filePath = Server.rootDirectory + "/" + Server.responsesDirectory + "/" + "fileNotFound.html";
+        String filePath = Server.DIRECTORY_ROOT + "/responses/fileNotFound.html";
 
         try {
-            String data = FileHandler.readFile(filePath);
+            byte[] data = FileHandler.readFile(filePath);
             assertEquals(
-                    "<!DOCTYPE html>\r\n" +
+                    ("<!DOCTYPE html>\r\n" +
                             "<html>\r\n" +
                             "    <body>\r\n" +
                             "        <h1>404 File Not Found</h1>\r\n" +
                             "        <p>Can't find that stupid file.</p>\r\n" +
                             "        <p>Click here for useless information.</p>\r\n" +
                             "    </body>\r\n" +
-                            "</html>"
+                            "</html>").getBytes()
                     , data);
         } catch (FileNotFoundException e) {
             fail();
@@ -34,10 +34,10 @@ public class FileHandlerTest {
 
     @Test
     void throwsFileNotFoundExceptionWhenGivenInvalidFile(){
-        String filePath = Server.rootDirectory + "/" + Server.responsesDirectory + "/" + "file.html";
+        String filePath = Server.DIRECTORY_ROOT + "/responses/file.html";
 
        assertThrows(FileNotFoundException.class, () -> {
-           String data = FileHandler.readFile(filePath);
+           FileHandler.readFile(filePath);
         });
     }
 }

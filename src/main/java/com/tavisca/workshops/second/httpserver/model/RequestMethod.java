@@ -1,5 +1,5 @@
 package com.tavisca.workshops.second.httpserver.model;
 
-public enum RequestType {
+public enum RequestMethod {
     GET
 }

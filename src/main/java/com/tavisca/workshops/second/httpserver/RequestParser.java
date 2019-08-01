@@ -1,37 +1,42 @@
 package com.tavisca.workshops.second.httpserver;
 
-import com.tavisca.workshops.second.httpserver.exception.HttpRequestParseException;
-import com.tavisca.workshops.second.httpserver.model.HttpRequest;
-import com.tavisca.workshops.second.httpserver.model.RequestType;
+import com.tavisca.workshops.second.httpserver.exception.RequestParseException;
+import com.tavisca.workshops.second.httpserver.model.Request;
+import com.tavisca.workshops.second.httpserver.model.RequestMethod;
 
-import java.text.ParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RequestParser {
-    public static HttpRequest parse(String requestString) throws HttpRequestParseException {
-        Pattern line = Pattern.compile("(.*)");
+
+    public static final String REGEX_LINE_GROUP = "(.*)";
+    public static final String MESSAGE_INVALID_REQUEST_FORMAT = "Invalid HttpRequest format";
+    public static final String MESSAGE_INVALID_REQUEST_METHOD = "Invalid HttpRequest method";
+
+    public static Request parse(String requestString) throws RequestParseException {
+        Pattern line = Pattern.compile(REGEX_LINE_GROUP);
         Matcher lineMatcher = line.matcher(requestString);
         if(lineMatcher.find()){
             String firstLine = lineMatcher.group();
             String[] parts = firstLine.split(" ");
 
-            RequestType requestType = getRequestTypeFor(parts[0]);
+            RequestMethod requestMethod = getRequestTypeFor(parts[0]);
+
             //Removing the '/' at the beginning, eg. '/index.html' -> 'index.html'
             String resource = parts[1].length() > 1 ? parts[1].substring(1): "";
 
             String protocol = parts[2];
-            return new HttpRequest(requestString, requestType, resource, protocol);
+            return new Request(requestMethod, resource, protocol);
         }
-        throw new HttpRequestParseException("Invalid HttpRequest format");
+        throw new RequestParseException(MESSAGE_INVALID_REQUEST_FORMAT);
     }
 
-    public static RequestType getRequestTypeFor(String requestTypeString) throws HttpRequestParseException {
+    public static RequestMethod getRequestTypeFor(String requestTypeString) throws RequestParseException {
         switch (requestTypeString){
             case "GET":
-                return RequestType.GET;
+                return RequestMethod.GET;
             default:
-                throw new HttpRequestParseException("Invalid HttpRequest method");
+                throw new RequestParseException(MESSAGE_INVALID_REQUEST_METHOD);
         }
     }
 }
