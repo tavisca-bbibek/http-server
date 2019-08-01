@@ -2,27 +2,21 @@ package com.tavisca.workshops.second.httpserver.util;
 
 import com.tavisca.workshops.second.httpserver.exception.InvalidResourceFormatException;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ResourceHandler {
 
-    public static final String RESOURCE_PATTERN = "(.*)\\.([a-zA-Z0-9]*)";
-    public static final Map<String, String> extensionToMimeMap = Collections.unmodifiableMap(
-            new HashMap<String, String>(){{
-                put("html", "text/html");
-                put("htm", "text/html");
-                put("jpeg", "image/jpeg");
-                put("jpg", "image/jpeg");
-                put("png", "image/png");
-                put("ico", "image/x-icon");
-                put("txt", "plain/text");
-            }}
-    );
+    private static final String RESOURCE_PATTERN = "(.*)\\.([a-zA-Z0-9]*)";
+    private static final Map<String, String> extensionToMimeMap = Map.of(
+            "html", "text/html",
+            "htm", "text/html",
+            "jpeg", "image/jpeg",
+            "jpg", "image/jpeg",
+            "png", "image/png",
+            "ico", "image/x-icon",
+            "txt", "plain/text");
 
     private static String getExtension(String resource) throws InvalidResourceFormatException{
         Pattern resourcePattern = Pattern.compile(RESOURCE_PATTERN);

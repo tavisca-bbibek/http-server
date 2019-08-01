@@ -8,7 +8,7 @@ import java.text.ParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class HttpRequestParser {
+public class RequestParser {
     public static HttpRequest parse(String requestString) throws HttpRequestParseException {
         Pattern line = Pattern.compile("(.*)");
         Matcher lineMatcher = line.matcher(requestString);

@@ -1,7 +1,7 @@
 package com.tavisca.workshops.second.httpserver.util;
 
 
-import com.tavisca.workshops.second.httpserver.HttpServer;
+import com.tavisca.workshops.second.httpserver.Server;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
@@ -13,7 +13,7 @@ public class FileHandlerTest {
 
     @Test
     void canReadContentsOfTheFile() {
-        String filePath = HttpServer.rootDirectory + "/" + HttpServer.responsesDirectory + "/" + "fileNotFound.html";
+        String filePath = Server.rootDirectory + "/" + Server.responsesDirectory + "/" + "fileNotFound.html";
 
         try {
             String data = FileHandler.readFile(filePath);
@@ -34,7 +34,7 @@ public class FileHandlerTest {
 
     @Test
     void throwsFileNotFoundExceptionWhenGivenInvalidFile(){
-        String filePath = HttpServer.rootDirectory + "/" + HttpServer.responsesDirectory + "/" + "file.html";
+        String filePath = Server.rootDirectory + "/" + Server.responsesDirectory + "/" + "file.html";
 
        assertThrows(FileNotFoundException.class, () -> {
            String data = FileHandler.readFile(filePath);

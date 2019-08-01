@@ -1,17 +1,13 @@
 package com.tavisca.workshops.second.httpserver;
 
-import com.tavisca.workshops.second.httpserver.HttpServer;
-import com.tavisca.workshops.second.httpserver.model.HttpRequest;
-
 import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.util.Date;
 import java.util.TimeZone;
 
-public class HeaderGenerator {
+public class ResponseHeaderGenerator {
     public static String generate(String protocol, int statusCode, int payloadLength, String contentType) {
         StringBuilder headerBuilder = new StringBuilder();
-        headerBuilder.append(protocol + " " + statusCode + " " + HttpServer.statusCodeToStringMap.get(statusCode) + "\n")
+        headerBuilder.append(protocol + " " + statusCode + " " + Server.statusCodeToStringMap.get(statusCode) + "\n")
                 .append("Date: " +
                         getCurrentDateTimeString()
                         + "\n")
