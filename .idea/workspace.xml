@@ -10,7 +10,9 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/tavisca/workshops/second/httpserver/RequestParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/tavisca/workshops/second/httpserver/RequestParser.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/tavisca/workshops/second/httpserver/ResponseGenerator.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/tavisca/workshops/second/httpserver/ResponseGenerator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tavisca/workshops/second/httpserver/RequestParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tavisca/workshops/second/httpserver/RequestParser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/tavisca/workshops/second/httpserver/ResponseGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tavisca/workshops/second/httpserver/ResponseGenerator.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -236,7 +238,14 @@
       <option name="project" value="LOCAL" />
       <updated>1564726878114</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Fixed bug - Bad Request">
+      <created>1564727064407</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1564727064407</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -258,7 +267,8 @@
     <MESSAGE value="Even more refactoring" />
     <MESSAGE value="Added feature to look for index.html when directory path is requested." />
     <MESSAGE value="Refactored handling of DirectoryPath request." />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactored handling of DirectoryPath request." />
+    <MESSAGE value="Fixed bug - Bad Request" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed bug - Bad Request" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

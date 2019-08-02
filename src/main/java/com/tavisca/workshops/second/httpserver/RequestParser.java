@@ -9,12 +9,12 @@ import java.util.regex.Pattern;
 
 public class RequestParser {
 
-    private static final String REGEX_LINE_GROUP = "(.*)";
+    private static final String PATTERN_LINE_GROUP = "(.*)";
     private static final String MESSAGE_INVALID_REQUEST_FORMAT = "Invalid HttpRequest format";
     private static final String MESSAGE_INVALID_REQUEST_METHOD = "Invalid HttpRequest method";
 
     public static Request parse(String requestString) throws RequestParseException {
-        Pattern line = Pattern.compile(REGEX_LINE_GROUP);
+        Pattern line = Pattern.compile(PATTERN_LINE_GROUP);
         Matcher lineMatcher = line.matcher(requestString);
         if(lineMatcher.find()){
             String firstLine = lineMatcher.group();

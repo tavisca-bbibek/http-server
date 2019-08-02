@@ -10,14 +10,14 @@ import java.nio.ByteBuffer;
 
 public class ResponseGenerator {
 
-    private static final String PATTERN_RESOURCE_DIRECTORY = "(.+)(\\/?)|^(.+)\\/([^\\/]+)\\/?$";
+    private static final String PATTERN_FILE_PATH = "(.*)\\.(.*)$";
 
     public static byte[] generate(Request request) {
         String resourcePath = request.getResourcePath();
         if (resourcePath.isEmpty()) {
             request.setResourcePath(Server.FILE_DEFAULT);
             return generate(request);
-        } else if(resourcePath.matches(PATTERN_RESOURCE_DIRECTORY)) {
+        } else if(!resourcePath.matches(PATTERN_FILE_PATH)) {
             request.setResourcePath(resourcePath + "/" + Server.FILE_DEFAULT);
             return generate(request);
         }
