@@ -10,27 +10,31 @@ import java.nio.ByteBuffer;
 
 public class ResponseGenerator {
 
+    private static final String PATTERN_RESOURCE_DIRECTORY = "(.+)(\\/?)|^(.+)\\/([^\\/]+)\\/?$";
+
     public static byte[] generate(Request request) {
         String resourcePath = request.getResourcePath();
         if (resourcePath.isEmpty()) {
             request.setResourcePath(Server.FILE_DEFAULT);
-            return generate(request);
-        } else {
+        }
+        try {
             try {
-                try {
-                    String mimeType = Server.getMimeType(resourcePath);
-                    byte[] body = FileHandler.readFile(resourcePath);
-                    String header = ResponseHeaderGenerator.generate(request.getProtocol(),
-                            200, body.length, mimeType);
-                    return combineArrays(header.getBytes(), body);
-                } catch (InvalidResourceFormatException e) {
-                    return Response.clientError();
+                String mimeType = Server.getMimeType(resourcePath);
+                byte[] body = FileHandler.readFile(resourcePath);
+                String header = ResponseHeaderGenerator.generate(request.getProtocol(),
+                        200, body.length, mimeType);
+                return combineArrays(header.getBytes(), body);
+            } catch (InvalidResourceFormatException e) {
+                if(resourcePath.matches(PATTERN_RESOURCE_DIRECTORY)) {
+                    request.setResourcePath(resourcePath + "/" + Server.FILE_DEFAULT);
+                    return generate(request);
                 }
-            } catch (FileNotFoundException e) {
-                return Response.fileNotFound();
-            } catch (InaccessibleFileException e){
-                return Response.serverError();
+                return Response.clientError();
             }
+        } catch (FileNotFoundException e) {
+            return Response.fileNotFound();
+        } catch (InaccessibleFileException e) {
+            return Response.serverError();
         }
     }
 
