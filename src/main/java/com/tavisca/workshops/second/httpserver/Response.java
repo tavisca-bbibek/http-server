@@ -9,9 +9,9 @@ public class Response {
     private static final String PROTOCOL = "HTTP/1.1";
     private static final String MIME_TYPE = "text/html";
     private static final String MESSAGE_FILE_MISSING = "Server file missing";
-    private static final String FILE_FILE_NOT_FOUND = "www/responses/fileNotFound.html";
-    private static final String FILE_SERVER_ERROR = "www/responses/serverError.html";
-    private static final String FILE_CLIENT_ERROR = "www/responses/clientError.html";
+    private static final String FILE_FILE_NOT_FOUND = "responses/fileNotFound.html";
+    private static final String FILE_SERVER_ERROR = "responses/serverError.html";
+    private static final String FILE_CLIENT_ERROR = "responses/clientError.html";
 
     static byte[] fileNotFound() {
         byte[] body;
@@ -21,7 +21,7 @@ public class Response {
             return serverError();
         }
         String header = ResponseHeaderGenerator.generate(PROTOCOL, 200, body.length, MIME_TYPE);
-        return (header + body).getBytes();
+        return ResponseGenerator.combineArrays(header.getBytes(), body);
     }
 
     private static byte[] serverError() {
@@ -32,7 +32,7 @@ public class Response {
             throw new IllegalStateException(MESSAGE_FILE_MISSING, e);
         }
         String header = ResponseHeaderGenerator.generate(PROTOCOL, 500, body.length, MIME_TYPE);
-        return (header + body).getBytes();
+        return ResponseGenerator.combineArrays(header.getBytes(), body);
     }
 
     public static byte[] clientError() {
@@ -43,6 +43,6 @@ public class Response {
             throw new IllegalStateException(MESSAGE_FILE_MISSING, e);
         }
         String header = ResponseHeaderGenerator.generate(PROTOCOL, 400, body.length, "text/html");
-        return (header + body).getBytes();
+        return ResponseGenerator.combineArrays(header.getBytes(), body);
     }
 }

@@ -16,9 +16,9 @@ public class Server {
     private static final int PORT = 80;
     public static final String DIRECTORY_ROOT = "www";
     public static final String DIRECTORY_LOG = "logs";
-    public static final String FILE_DEFAULT = "index.html";
+    static final String FILE_DEFAULT = "index.html";
 
-    public static final int THREAD_POOL_SIZE = 100;
+    private static final int THREAD_POOL_SIZE = 100;
 
     public static final Map<Integer, String> statusCodeToStringMap = Map.of(
             200, "OK",
@@ -26,7 +26,7 @@ public class Server {
             404, "Not Found",
             500, "Internal Server Error");
 
-    public static final Map<String, String> extensionToMimeMap;
+    private static final Map<String, String> extensionToMimeMap;
 
     static {
         extensionToMimeMap = new HashMap<String, String>() {{
@@ -60,7 +60,7 @@ public class Server {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         ExecutorService threadPool = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
         while (true) {
             try {
