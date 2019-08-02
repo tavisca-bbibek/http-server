@@ -16,7 +16,8 @@ public class ResponseGenerator {
         String resourcePath = request.getResourcePath();
         if (resourcePath.isEmpty()) {
             request.setResourcePath(Server.FILE_DEFAULT);
-        }
+        } else if(resourcePath.matches(PATTERN_RESOURCE_DIRECTORY))
+            request.setResourcePath(resourcePath + "/" + Server.FILE_DEFAULT);
         try {
             try {
                 String mimeType = Server.getMimeType(resourcePath);
@@ -25,10 +26,6 @@ public class ResponseGenerator {
                         200, body.length, mimeType);
                 return combineArrays(header.getBytes(), body);
             } catch (InvalidResourceFormatException e) {
-                if(resourcePath.matches(PATTERN_RESOURCE_DIRECTORY)) {
-                    request.setResourcePath(resourcePath + "/" + Server.FILE_DEFAULT);
-                    return generate(request);
-                }
                 return Response.clientError();
             }
         } catch (FileNotFoundException e) {
