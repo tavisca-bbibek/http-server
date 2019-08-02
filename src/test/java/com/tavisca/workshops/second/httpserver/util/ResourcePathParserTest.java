@@ -12,7 +12,7 @@ class ResourcePathParserTest {
     void canExtractExtensionFromResourceString() {
         String extension = null;
         try {
-            extension = ResourcePathParser.getMimeType("www/resources/image.jpeg");
+            extension = ResourcePathParser.parseExtension("www/resources/image.jpeg");
             assertEquals("jpeg", extension);
         } catch (InvalidResourceFormatException e) {
             fail();

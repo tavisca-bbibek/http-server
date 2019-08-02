@@ -38,7 +38,7 @@ public class ResponseGenerator {
         }
     }
 
-    public static byte[] combineArrays(byte[] arr1, byte[] arr2) {
+    static byte[] combineArrays(byte[] arr1, byte[] arr2) {
         byte[] combined = new byte[arr1.length + arr2.length];
         ByteBuffer buffer = ByteBuffer.wrap(combined);
         buffer.put(arr1)

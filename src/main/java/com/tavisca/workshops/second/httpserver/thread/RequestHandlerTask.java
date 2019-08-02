@@ -5,6 +5,7 @@ import com.tavisca.workshops.second.httpserver.Response;
 import com.tavisca.workshops.second.httpserver.ResponseGenerator;
 import com.tavisca.workshops.second.httpserver.exception.RequestParseException;
 import com.tavisca.workshops.second.httpserver.model.Request;
+import com.tavisca.workshops.second.httpserver.model.RequestMethod;
 
 import java.io.*;
 import java.net.Socket;
@@ -50,11 +51,10 @@ public class RequestHandlerTask implements Runnable {
         byte[] response = null;
         try {
             Request request = RequestParser.parse(requestString);
-            switch (request.getMethod()) {
-                case GET:
-                    response = ResponseGenerator.generate(request);
-                    responseStream.write(response);
-                    responseStream.flush();
+            if (request.getMethod() == RequestMethod.GET) {
+                response = ResponseGenerator.generate(request);
+                responseStream.write(response);
+                responseStream.flush();
             }
         } catch (RequestParseException e) {
             response = Response.clientError();

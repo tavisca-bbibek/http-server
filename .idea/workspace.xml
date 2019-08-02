@@ -6,20 +6,48 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/jarAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/tavisca/workshops/second/httpserver/RequestParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/tavisca/workshops/second/httpserver/RequestParser.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/tavisca/workshops/second/httpserver/ResponseGenerator.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/tavisca/workshops/second/httpserver/ResponseGenerator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tavisca/workshops/second/httpserver/RequestParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tavisca/workshops/second/httpserver/RequestParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/tavisca/workshops/second/httpserver/ResponseHeaderGenerator.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/tavisca/workshops/second/httpserver/ResponseHeaderGenerator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/test/com/tavisca/workshops/second/httpserver/HeaderGeneratorTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/test/com/tavisca/workshops/second/httpserver/HeaderGeneratorTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/test/com/tavisca/workshops/second/httpserver/HttpRequestParserTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/test/com/tavisca/workshops/second/httpserver/util/FileHandlerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/test/com/tavisca/workshops/second/httpserver/util/FileHandlerTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/test/com/tavisca/workshops/second/httpserver/util/ResourceHandlerTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/classes/com.tavisca.workshops.second.httpserver.util.ResourceHandlerTest.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/css/base-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/css/base-style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/js/report.js" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/js/report.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/packages/com.tavisca.workshops.second.httpserver.util.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/test-results/test/TEST-com.tavisca.workshops.second.httpserver.util.ResourceHandlerTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/output.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/output.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/output.bin.idx" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/output.bin.idx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/results.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/results.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/tavisca/workshops/second/httpserver/ResponseGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tavisca/workshops/second/httpserver/ResponseGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tavisca/workshops/second/httpserver/ResponseHeaderGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tavisca/workshops/second/httpserver/ResponseHeaderGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tavisca/workshops/second/httpserver/logger/FileLogger.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tavisca/workshops/second/httpserver/logger/Logger.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tavisca/workshops/second/httpserver/thread/RequestHandlerTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tavisca/workshops/second/httpserver/thread/RequestHandlerTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tavisca/workshops/second/httpserver/util/DateTimeGenerator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/tavisca/workshops/second/httpserver/HeaderGeneratorTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/tavisca/workshops/second/httpserver/RequestParserTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/tavisca/workshops/second/httpserver/RequestParserTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/tavisca/workshops/second/httpserver/util/FileHandlerTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/tavisca/workshops/second/httpserver/util/ResourcePathParserTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/tavisca/workshops/second/httpserver/util/ResourcePathParserTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageViewManager">
+    <option name="myElementSize" value="190" />
   </component>
   <component name="DefaultGradleProjectSettings">
     <option name="testRunner" value="GRADLE" />
@@ -88,7 +116,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Server">
+  <component name="RunManager" selected="Gradle.HeaderGeneratorTest.canGenerateHeaderWithOKStatus">
     <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.tavisca.workshops.second.httpserver.Server" />
       <module name="HttpServer.main" />
@@ -184,9 +212,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.HeaderGeneratorTest.canGenerateHeaderWithOKStatus" />
         <item itemvalue="Application.Server" />
         <item itemvalue="Gradle.ResourceHandlerTest.canExtractExtensionFromResourceString" />
-        <item itemvalue="Gradle.HeaderGeneratorTest.canGenerateHeaderWithOKStatus" />
         <item itemvalue="Gradle.HttpRequestParserTest.canParseRequest" />
         <item itemvalue="Gradle.FileHandlerTest.canReadContentsOfTheFile" />
       </list>
@@ -245,7 +273,14 @@
       <option name="project" value="LOCAL" />
       <updated>1564727064407</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Fixed bug - respond with index.html for directory path request">
+      <created>1564729035527</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1564729035527</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -268,18 +303,8 @@
     <MESSAGE value="Added feature to look for index.html when directory path is requested." />
     <MESSAGE value="Refactored handling of DirectoryPath request." />
     <MESSAGE value="Fixed bug - Bad Request" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed bug - Bad Request" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/tavisca/workshops/second/httpserver/thread/RequestHandlerTask.java</url>
-          <line>51</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Fixed bug - respond with index.html for directory path request" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed bug - respond with index.html for directory path request" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/HttpServer$Server.ic" NAME="Server Coverage Results" MODIFIED="1564725708864" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
