@@ -9,9 +9,9 @@ import java.util.regex.Pattern;
 
 public class RequestParser {
 
-    public static final String REGEX_LINE_GROUP = "(.*)";
-    public static final String MESSAGE_INVALID_REQUEST_FORMAT = "Invalid HttpRequest format";
-    public static final String MESSAGE_INVALID_REQUEST_METHOD = "Invalid HttpRequest method";
+    private static final String REGEX_LINE_GROUP = "(.*)";
+    private static final String MESSAGE_INVALID_REQUEST_FORMAT = "Invalid HttpRequest format";
+    private static final String MESSAGE_INVALID_REQUEST_METHOD = "Invalid HttpRequest method";
 
     public static Request parse(String requestString) throws RequestParseException {
         Pattern line = Pattern.compile(REGEX_LINE_GROUP);
@@ -31,12 +31,10 @@ public class RequestParser {
         throw new RequestParseException(MESSAGE_INVALID_REQUEST_FORMAT);
     }
 
-    public static RequestMethod getRequestTypeFor(String requestTypeString) throws RequestParseException {
-        switch (requestTypeString){
-            case "GET":
-                return RequestMethod.GET;
-            default:
-                throw new RequestParseException(MESSAGE_INVALID_REQUEST_METHOD);
+    private static RequestMethod getRequestTypeFor(String requestMethod) throws RequestParseException {
+        if ("GET".equals(requestMethod)) {
+            return RequestMethod.GET;
         }
+        throw new RequestParseException(MESSAGE_INVALID_REQUEST_METHOD);
     }
 }
