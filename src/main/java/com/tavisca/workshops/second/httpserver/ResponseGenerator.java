@@ -16,8 +16,11 @@ public class ResponseGenerator {
         String resourcePath = request.getResourcePath();
         if (resourcePath.isEmpty()) {
             request.setResourcePath(Server.FILE_DEFAULT);
-        } else if(resourcePath.matches(PATTERN_RESOURCE_DIRECTORY))
+            return generate(request);
+        } else if(resourcePath.matches(PATTERN_RESOURCE_DIRECTORY)) {
             request.setResourcePath(resourcePath + "/" + Server.FILE_DEFAULT);
+            return generate(request);
+        }
         try {
             try {
                 String mimeType = Server.getMimeType(resourcePath);
