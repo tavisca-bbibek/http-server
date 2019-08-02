@@ -1,5 +1,6 @@
 package com.tavisca.workshops.second.httpserver;
 
+import com.tavisca.workshops.second.httpserver.exception.InaccessibleFileException;
 import com.tavisca.workshops.second.httpserver.exception.InvalidResourceFormatException;
 import com.tavisca.workshops.second.httpserver.model.Request;
 import com.tavisca.workshops.second.httpserver.util.FileHandler;
@@ -27,6 +28,8 @@ public class ResponseGenerator {
                 }
             } catch (FileNotFoundException e) {
                 return Response.fileNotFound();
+            } catch (InaccessibleFileException e){
+                return Response.serverError();
             }
         }
     }
