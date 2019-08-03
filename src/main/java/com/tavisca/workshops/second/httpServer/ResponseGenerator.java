@@ -25,24 +25,30 @@ public class ResponseGenerator {
             try {
                 String mimeType = Server.getMimeType(resourcePath);
                 byte[] body = FileHandler.readFile(resourcePath);
-                String header = ResponseHeaderGenerator.generate(request.getProtocol(),
+                byte[] header = ResponseHeaderGenerator.generate(request.getProtocol(),
                         200, body.length, mimeType);
-                return combineArrays(header.getBytes(), body);
+                return combineArrays(header, body);
             } catch (InvalidResourceFormatException e) {
-                return Response.clientError();
+                byte[] body = Response.clientError();
+                byte[] header = ResponseHeaderGenerator.generateClientError(body.length);
+                return combineArrays(header, body);
             }
         } catch (FileNotFoundException e) {
-            return Response.fileNotFound();
+            byte[] body = Response.fileNotFound();
+            byte[] header = ResponseHeaderGenerator.generateFileNotFound(body.length);
+            return combineArrays(header, body);
         } catch (InaccessibleFileException e) {
-            return Response.serverError();
+            byte[] body = Response.fileNotFound();
+            byte[] header = ResponseHeaderGenerator.generateServerError(body.length);
+            return combineArrays(header, body);
         }
     }
 
-    static byte[] combineArrays(byte[] arr1, byte[] arr2) {
-        byte[] combined = new byte[arr1.length + arr2.length];
-        ByteBuffer buffer = ByteBuffer.wrap(combined);
+    private static byte[] combineArrays(byte[] arr1, byte[] arr2) {
+        byte[] response = new byte[arr1.length + arr2.length];
+        ByteBuffer buffer = ByteBuffer.wrap(response);
         buffer.put(arr1)
                 .put(arr2);
-        return combined;
+        return response;
     }
 }
