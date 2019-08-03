@@ -12,42 +12,52 @@ import java.nio.ByteBuffer;
 public class Response {
 
     private static final String PATTERN_FILE_PATH = "(.*)\\.(.*)$";
+    private static final String FILE_DEFAULT = "index.html";
+    private Request request;
+    private byte[] header;
+    private byte[] body;
 
-    public static byte[] generate(Request request) {
+    public Response(Request request) {
+        this.request = request;
+        initialize();
+    }
+
+    public Response(byte[] header, byte[] body) {
+        this.header = header;
+        this.body = body;
+    }
+
+    private void initialize() {
         String resourcePath = request.getResourcePath();
         if (resourcePath.isEmpty()) {
-            request.setResourcePath(Server.FILE_DEFAULT);
-            return generate(request);
+            request.setResourcePath(FILE_DEFAULT);
+            initialize();
         } else if (!resourcePath.matches(PATTERN_FILE_PATH)) {
-            request.setResourcePath(resourcePath + "/" + Server.FILE_DEFAULT);
-            return generate(request);
+            request.setResourcePath(resourcePath + "/" + FILE_DEFAULT);
+            initialize();
         }
         try {
             try {
-                byte[] body = FileHandler.readFile(resourcePath);
-                byte[] header = new Header(body.length, request.getMimeType()).getBytes();
-                return combineArrays(header, body);
+                body = FileHandler.readFile(resourcePath);
+                header = new Header(body.length, request.getMimeType()).getBytes();
             } catch (InvalidResourceFormatException e) {
-                byte[] body = ResponseBody.clientError();
-                byte[] header = new Header(body.length).generateClientError(body.length);
-                return combineArrays(header, body);
+                body = ErrorData.clientError();
+                header = new Header(body.length).clientError();
             }
         } catch (FileNotFoundException e) {
-            byte[] body = ResponseBody.fileNotFound();
-            byte[] header = new Header(body.length).generateFileNotFound(body.length);
-            return combineArrays(header, body);
+            body = ErrorData.fileNotFound();
+            header = new Header(body.length).fileNotFound();
         } catch (InaccessibleFileException e) {
-            byte[] body = ResponseBody.fileNotFound();
-            byte[] header = new Header(body.length).generateServerError(body.length);
-            return combineArrays(header, body);
+            body = ErrorData.fileNotFound();
+            header = new Header(body.length).serverError();
         }
     }
 
-    private static byte[] combineArrays(byte[] arr1, byte[] arr2) {
-        byte[] response = new byte[arr1.length + arr2.length];
+    public byte[] getBytes() {
+        byte[] response = new byte[header.length + body.length];
         ByteBuffer buffer = ByteBuffer.wrap(response);
-        buffer.put(arr1)
-                .put(arr2);
+        buffer.put(header)
+                .put(body);
         return response;
     }
 }

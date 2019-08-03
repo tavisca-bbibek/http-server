@@ -59,17 +59,17 @@ public class Header {
         return toString().getBytes();
     }
 
-    public byte[] generateFileNotFound(int contentLength) {
+    public byte[] fileNotFound() {
         statusCode = 404;
         return getBytes();
     }
 
-    public byte[] generateClientError(int contentLength) {
+    public byte[] clientError() {
         statusCode = 500;
         return getBytes();
     }
 
-    public byte[] generateServerError(int contentLength) {
+    public byte[] serverError() {
         statusCode = 400;
         return getBytes();
     }

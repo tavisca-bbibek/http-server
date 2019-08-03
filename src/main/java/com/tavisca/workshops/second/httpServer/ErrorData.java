@@ -5,7 +5,7 @@ import com.tavisca.workshops.second.httpServer.util.FileHandler;
 
 import java.io.FileNotFoundException;
 
-public class ResponseBody {
+public class ErrorData {
     private static final String MESSAGE_FILE_MISSING = "Server file missing";
     private static final String FILE_FILE_NOT_FOUND = "responses/fileNotFound.html";
     private static final String FILE_SERVER_ERROR = "responses/serverError.html";

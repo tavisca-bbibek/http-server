@@ -12,7 +12,6 @@ public class Server {
     private static final int PORT = 80;
     public static final String DIRECTORY_ROOT = "www";
     public static final String DIRECTORY_LOG = "logs";
-    static final String FILE_DEFAULT = "index.html";
 
     private static final int THREAD_POOL_SIZE = 100;
 
