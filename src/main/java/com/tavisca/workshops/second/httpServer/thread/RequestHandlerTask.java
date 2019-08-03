@@ -1,11 +1,11 @@
-package com.tavisca.workshops.second.httpserver.thread;
+package com.tavisca.workshops.second.httpServer.thread;
 
-import com.tavisca.workshops.second.httpserver.RequestParser;
-import com.tavisca.workshops.second.httpserver.Response;
-import com.tavisca.workshops.second.httpserver.ResponseGenerator;
-import com.tavisca.workshops.second.httpserver.exception.RequestParseException;
-import com.tavisca.workshops.second.httpserver.model.Request;
-import com.tavisca.workshops.second.httpserver.model.RequestMethod;
+import com.tavisca.workshops.second.httpServer.RequestParser;
+import com.tavisca.workshops.second.httpServer.Response;
+import com.tavisca.workshops.second.httpServer.ResponseGenerator;
+import com.tavisca.workshops.second.httpServer.exception.RequestParseException;
+import com.tavisca.workshops.second.httpServer.model.Request;
+import com.tavisca.workshops.second.httpServer.model.RequestMethod;
 
 import java.io.*;
 import java.net.Socket;
@@ -48,7 +48,7 @@ public class RequestHandlerTask implements Runnable {
     }
 
     private void writeResponse(String requestString, OutputStream responseStream) throws IOException {
-        byte[] response = null;
+        byte[] response;
         try {
             Request request = RequestParser.parse(requestString);
             if (request.getMethod() == RequestMethod.GET) {

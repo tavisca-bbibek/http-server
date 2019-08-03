@@ -1,4 +1,4 @@
-package com.tavisca.workshops.second.httpserver;
+package com.tavisca.workshops.second.httpServer;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

@@ -1,7 +1,7 @@
-package com.tavisca.workshops.second.httpserver.util;
+package com.tavisca.workshops.second.httpServer.util;
 
-import com.tavisca.workshops.second.httpserver.Server;
-import com.tavisca.workshops.second.httpserver.exception.InaccessibleFileException;
+import com.tavisca.workshops.second.httpServer.Server;
+import com.tavisca.workshops.second.httpServer.exception.InaccessibleFileException;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

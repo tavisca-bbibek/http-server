@@ -1,7 +1,7 @@
-package com.tavisca.workshops.second.httpserver;
+package com.tavisca.workshops.second.httpServer;
 
-import com.tavisca.workshops.second.httpserver.exception.InaccessibleFileException;
-import com.tavisca.workshops.second.httpserver.util.FileHandler;
+import com.tavisca.workshops.second.httpServer.exception.InaccessibleFileException;
+import com.tavisca.workshops.second.httpServer.util.FileHandler;
 
 import java.io.FileNotFoundException;
 
@@ -24,7 +24,7 @@ public class Response {
             //TODO: log can't access server file
             return Response.serverError();
         }
-        String header = ResponseHeaderGenerator.generate(PROTOCOL, 200, body.length, MIME_TYPE);
+        String header = ResponseHeaderGenerator.generate(PROTOCOL, 404, body.length, MIME_TYPE);
         return ResponseGenerator.combineArrays(header.getBytes(), body);
     }
 

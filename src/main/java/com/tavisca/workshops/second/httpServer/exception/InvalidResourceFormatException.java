@@ -1,4 +1,4 @@
-package com.tavisca.workshops.second.httpserver.exception;
+package com.tavisca.workshops.second.httpServer.exception;
 
 public class InvalidResourceFormatException extends Exception{
     public InvalidResourceFormatException(String message) {

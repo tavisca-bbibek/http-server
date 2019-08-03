@@ -1,6 +1,6 @@
-package com.tavisca.workshops.second.httpserver.util;
+package com.tavisca.workshops.second.httpServer.util;
 
-import com.tavisca.workshops.second.httpserver.exception.InvalidResourceFormatException;
+import com.tavisca.workshops.second.httpServer.exception.InvalidResourceFormatException;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

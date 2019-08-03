@@ -1,4 +1,4 @@
-package com.tavisca.workshops.second.httpserver.model;
+package com.tavisca.workshops.second.httpServer.model;
 
 import java.util.Objects;
 

@@ -1,8 +1,8 @@
-package com.tavisca.workshops.second.httpserver;
+package com.tavisca.workshops.second.httpServer;
 
-import com.tavisca.workshops.second.httpserver.exception.RequestParseException;
-import com.tavisca.workshops.second.httpserver.model.Request;
-import com.tavisca.workshops.second.httpserver.model.RequestMethod;
+import com.tavisca.workshops.second.httpServer.exception.RequestParseException;
+import com.tavisca.workshops.second.httpServer.model.Request;
+import com.tavisca.workshops.second.httpServer.model.RequestMethod;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

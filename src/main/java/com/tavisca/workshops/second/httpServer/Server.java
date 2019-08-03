@@ -1,8 +1,8 @@
-package com.tavisca.workshops.second.httpserver;
+package com.tavisca.workshops.second.httpServer;
 
-import com.tavisca.workshops.second.httpserver.exception.InvalidResourceFormatException;
-import com.tavisca.workshops.second.httpserver.thread.RequestHandlerTask;
-import com.tavisca.workshops.second.httpserver.util.ResourcePathParser;
+import com.tavisca.workshops.second.httpServer.exception.InvalidResourceFormatException;
+import com.tavisca.workshops.second.httpServer.thread.RequestHandlerTask;
+import com.tavisca.workshops.second.httpServer.util.ResourcePathParser;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.logging.Logger;
 
 public class Server {
     private static final int PORT = 80;
@@ -65,7 +66,6 @@ public class Server {
         while (true) {
             try {
                 Socket socket = Server.getInstance().acceptRequest();
-                //TODO: Log request client.
                 threadPool.submit(new RequestHandlerTask(socket));
             } catch (IOException e) {
                 e.printStackTrace();
