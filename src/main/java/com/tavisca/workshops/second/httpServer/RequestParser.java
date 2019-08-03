@@ -20,7 +20,7 @@ public class RequestParser {
             String firstLine = lineMatcher.group();
             String[] parts = firstLine.split(" ");
 
-            RequestMethod requestMethod = getRequestTypeFor(parts[0]);
+            RequestMethod requestMethod = requestMethodOf(parts[0]);
 
             //Removing the '/' at the beginning, eg. '/index.html' -> 'index.html'
             String resource = parts[1].length() > 1 ? parts[1].substring(1): "";
@@ -31,7 +31,7 @@ public class RequestParser {
         throw new RequestParseException(MESSAGE_INVALID_REQUEST_FORMAT);
     }
 
-    private static RequestMethod getRequestTypeFor(String requestMethod) throws RequestParseException {
+    private static RequestMethod requestMethodOf(String requestMethod) throws RequestParseException {
         if ("GET".equals(requestMethod)) {
             return RequestMethod.GET;
         }

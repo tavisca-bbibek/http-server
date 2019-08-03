@@ -1,8 +1,8 @@
 package com.tavisca.workshops.second.httpServer.thread;
 
 import com.tavisca.workshops.second.httpServer.RequestParser;
+import com.tavisca.workshops.second.httpServer.ResponseBody;
 import com.tavisca.workshops.second.httpServer.Response;
-import com.tavisca.workshops.second.httpServer.ResponseGenerator;
 import com.tavisca.workshops.second.httpServer.exception.RequestParseException;
 import com.tavisca.workshops.second.httpServer.model.Request;
 import com.tavisca.workshops.second.httpServer.model.RequestMethod;
@@ -52,12 +52,12 @@ public class RequestHandlerTask implements Runnable {
         try {
             Request request = RequestParser.parse(requestString);
             if (request.getMethod() == RequestMethod.GET) {
-                response = ResponseGenerator.generate(request);
+                response = Response.generate(request);
                 responseStream.write(response);
                 responseStream.flush();
             }
         } catch (RequestParseException e) {
-            response = Response.clientError();
+            response = ResponseBody.clientError();
             responseStream.write(response);
             responseStream.flush();
             //TODO: Log client error.

@@ -1,52 +1,53 @@
 package com.tavisca.workshops.second.httpServer;
 
 import com.tavisca.workshops.second.httpServer.exception.InaccessibleFileException;
+import com.tavisca.workshops.second.httpServer.exception.InvalidResourceFormatException;
+import com.tavisca.workshops.second.httpServer.model.Header;
+import com.tavisca.workshops.second.httpServer.model.Request;
 import com.tavisca.workshops.second.httpServer.util.FileHandler;
 
 import java.io.FileNotFoundException;
+import java.nio.ByteBuffer;
 
 public class Response {
-    private static final String MESSAGE_FILE_MISSING = "Server file missing";
-    private static final String FILE_FILE_NOT_FOUND = "responses/fileNotFound.html";
-    private static final String FILE_SERVER_ERROR = "responses/serverError.html";
-    private static final String FILE_CLIENT_ERROR = "responses/clientError.html";
 
-    static byte[] fileNotFound() {
-        byte[] content;
-        try {
-            content = FileHandler.readFile(FILE_FILE_NOT_FOUND);
-        } catch (FileNotFoundException e) {
-            return serverError();
-        }catch (InaccessibleFileException e) {
-            //TODO: log can't access server file
-            return serverError();
+    private static final String PATTERN_FILE_PATH = "(.*)\\.(.*)$";
+
+    public static byte[] generate(Request request) {
+        String resourcePath = request.getResourcePath();
+        if (resourcePath.isEmpty()) {
+            request.setResourcePath(Server.FILE_DEFAULT);
+            return generate(request);
+        } else if (!resourcePath.matches(PATTERN_FILE_PATH)) {
+            request.setResourcePath(resourcePath + "/" + Server.FILE_DEFAULT);
+            return generate(request);
         }
-        return content;
-    }
-
-    public static byte[] serverError() {
-        byte[] content;
         try {
-            content = FileHandler.readFile(FILE_SERVER_ERROR);
+            try {
+                byte[] body = FileHandler.readFile(resourcePath);
+                byte[] header = new Header(body.length, request.getMimeType()).getBytes();
+                return combineArrays(header, body);
+            } catch (InvalidResourceFormatException e) {
+                byte[] body = ResponseBody.clientError();
+                byte[] header = new Header(body.length).generateClientError(body.length);
+                return combineArrays(header, body);
+            }
         } catch (FileNotFoundException e) {
-            throw new IllegalStateException(MESSAGE_FILE_MISSING, e);
-        }catch (InaccessibleFileException e) {
-            //TODO: log can't access server file
-            return serverError();
-        }
-        return content;
-    }
-
-    public static byte[] clientError() {
-        byte[] content;
-        try {
-            content = FileHandler.readFile(FILE_CLIENT_ERROR);
-        } catch (FileNotFoundException e) {
-            throw new IllegalStateException(MESSAGE_FILE_MISSING, e);
+            byte[] body = ResponseBody.fileNotFound();
+            byte[] header = new Header(body.length).generateFileNotFound(body.length);
+            return combineArrays(header, body);
         } catch (InaccessibleFileException e) {
-            //TODO: log can't access server file
-            return serverError();
+            byte[] body = ResponseBody.fileNotFound();
+            byte[] header = new Header(body.length).generateServerError(body.length);
+            return combineArrays(header, body);
         }
-        return content;
+    }
+
+    private static byte[] combineArrays(byte[] arr1, byte[] arr2) {
+        byte[] response = new byte[arr1.length + arr2.length];
+        ByteBuffer buffer = ByteBuffer.wrap(response);
+        buffer.put(arr1)
+                .put(arr2);
+        return response;
     }
 }
