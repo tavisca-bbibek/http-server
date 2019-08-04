@@ -7,13 +7,26 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.logging.*;
 
 public class Server {
     private static final int PORT = 80;
-    public static final String DIRECTORY_ROOT = "www";
-    public static final String DIRECTORY_LOG = "logs";
-
     private static final int THREAD_POOL_SIZE = 100;
+    private static Logger logger = Logger.getLogger("com.tavisca.workshops.second.httpServer");
+
+    static {
+        final String PATTERN_LOG_FILE = "logs/server_log_%g.txt";
+        try {
+            Handler handler = new FileHandler(PATTERN_LOG_FILE, 1000, 2, true);
+            handler.setLevel(Level.ALL);
+            handler.setFormatter(new SimpleFormatter());
+
+            logger.addHandler(handler);
+            logger.setLevel(Level.FINE);
+        } catch (IOException e) {
+            throw new RuntimeException("Can't write logs.");
+        }
+    }
 
     private ServerSocket server = null;
     private static Server instance = null;
@@ -21,9 +34,9 @@ public class Server {
     private Server() {
         try {
             server = new ServerSocket(PORT);
-            System.out.println("Server started...");
+            logger.fine("Server started");
         } catch (IOException e) {
-            System.err.println(e.getMessage());
+            logger.severe("Can't start server - " + e.toString());
         }
     }
 
@@ -32,9 +45,10 @@ public class Server {
         while (true) {
             try {
                 Socket socket = Server.getInstance().acceptRequest();
+                logger.fine("Request from: " + socket.getInetAddress());
                 threadPool.submit(new RequestHandlerTask(socket));
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.severe("Server crashed - " + e.toString());
                 break;
             }
         }

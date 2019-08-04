@@ -59,7 +59,7 @@ public class RequestHandlerTask implements Runnable {
             }
         } catch (RequestParseException e) {
             byte[] body = ErrorData.clientError();
-            byte[] header = new Header(body.length).clientError();
+            Header header = new Header(body.length).clientError();
             Response response = new Response(header, body);
             responseStream.write(response.getBytes());
             responseStream.flush();

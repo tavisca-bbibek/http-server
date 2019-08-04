@@ -35,7 +35,7 @@ public class Header {
         this(protocol, statusCode, new Date(), contentLength, mimeType);
     }
 
-    private Header(String protocol, int statusCode, Date date, int contentLength, String mimeType) {
+    public Header(String protocol, int statusCode, Date date, int contentLength, String mimeType) {
         this.protocol = protocol;
         this.mimeType = mimeType;
         this.statusCode = statusCode;
@@ -44,7 +44,7 @@ public class Header {
     }
 
     public String toString() {
-        return protocol + " " + statusCode + " " + statusCodeToStringMap.get(statusCode) + "\n" +
+        String header = protocol + " " + statusCode + " " + statusCodeToStringMap.get(statusCode) + "\n" +
                 "Date: " +
                 getDateTimeString()
                 + "\n" +
@@ -52,25 +52,26 @@ public class Header {
                 "Content-Length: " + contentLength + '\n' +
                 "Connection: Closed\n" +
                 "Content-Type: " + mimeType + "\n\n";
+        return header;
     }
 
-    byte[] getBytes() {
+    public byte[] getBytes() {
         return toString().getBytes();
     }
 
-    byte[] fileNotFound() {
+    public Header fileNotFound() {
         statusCode = 404;
-        return getBytes();
+        return this;
     }
 
-    public byte[] clientError() {
+    public Header clientError() {
         statusCode = 500;
-        return getBytes();
+        return this;
     }
 
-    byte[] serverError() {
+    public Header serverError() {
         statusCode = 400;
-        return getBytes();
+        return this;
     }
 
     private String getDateTimeString() {
