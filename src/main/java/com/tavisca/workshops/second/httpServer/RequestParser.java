@@ -1,7 +1,6 @@
 package com.tavisca.workshops.second.httpServer;
 
 import com.tavisca.workshops.second.httpServer.exception.RequestParseException;
-import com.tavisca.workshops.second.httpServer.model.Request;
 import com.tavisca.workshops.second.httpServer.model.RequestMethod;
 
 import java.util.regex.Matcher;

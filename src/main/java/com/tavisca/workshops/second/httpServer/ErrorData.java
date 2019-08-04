@@ -11,7 +11,7 @@ public class ErrorData {
     private static final String FILE_SERVER_ERROR = "responses/serverError.html";
     private static final String FILE_CLIENT_ERROR = "responses/clientError.html";
 
-    static byte[] fileNotFound() {
+    public static byte[] fileNotFound() {
         byte[] content;
         try {
             content = FileHandler.readFile(FILE_FILE_NOT_FOUND);

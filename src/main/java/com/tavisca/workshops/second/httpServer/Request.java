@@ -1,8 +1,8 @@
-package com.tavisca.workshops.second.httpServer.model;
+package com.tavisca.workshops.second.httpServer;
 
 import com.tavisca.workshops.second.httpServer.exception.InvalidResourceFormatException;
+import com.tavisca.workshops.second.httpServer.model.RequestMethod;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.regex.Matcher;
@@ -15,27 +15,21 @@ public class Request {
     private static final String RESOURCE_PATH_PATTERN = "(.*)\\.([a-zA-Z0-9]*)";
 
 
-    private static final Map<String, String> extensionToMimeMap;
-
-    static {
-        extensionToMimeMap = new HashMap<String, String>() {{
-            put("html", "text/html");
-            put("htm", "text/html");
-            put("js", "text/text/javascript");
-            put("css", "text/css");
-            put("jpeg", "image/jpeg");
-            put("jpg", "image/jpeg");
-            put("png", "image/png");
-            put("ico", "image/x-icon");
-            put("txt", "plain/text");
-            put("otf", "font/otf");
-            put("ttf", "font/ttf");
-            put("svg", "image/svg+xml");
-            put("eot", "application/vnd.ms-fontobject");
-            put("woff", "font/woff");
-            put("woff2", "font/woff2");
-        }};
-    }
+    private static final Map<String, String> extensionToMimeMap = Map.ofEntries(Map.entry("html", "text/html"),
+                Map.entry("htm", "text/html"),
+                Map.entry("js", "text/text/javascript"),
+                Map.entry("css", "text/css"),
+                Map.entry("jpeg", "image/jpeg"),
+                Map.entry("jpg", "image/jpeg"),
+                Map.entry("png", "image/png"),
+                Map.entry("ico", "image/x-icon"),
+                Map.entry("txt", "plain/text"),
+                Map.entry("otf", "font/otf"),
+                Map.entry("ttf", "font/ttf"),
+                Map.entry("svg", "image/svg+xml"),
+                Map.entry("eot", "application/vnd.ms-fontobject"),
+                Map.entry("woff", "font/woff"),
+                Map.entry("woff2", "font/woff2"));
 
 
     public Request(RequestMethod method, String resourcePath, String protocol) {
@@ -44,7 +38,7 @@ public class Request {
         this.protocol = protocol;
     }
 
-    public String getMimeType() throws InvalidResourceFormatException {
+    String getMimeType() throws InvalidResourceFormatException {
         Pattern resourcePattern = Pattern.compile(RESOURCE_PATH_PATTERN);
         Matcher matcher = resourcePattern.matcher(resourcePath);
         if (matcher.find()) {
@@ -55,11 +49,11 @@ public class Request {
     }
 
 
-    public void setResourcePath(String resourcePath) {
+    void setResourcePath(String resourcePath) {
         this.resourcePath = resourcePath;
     }
 
-    public String getResourcePath() {
+    String getResourcePath() {
         return resourcePath;
     }
 

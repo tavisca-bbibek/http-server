@@ -1,4 +1,4 @@
-package com.tavisca.workshops.second.httpServer.model;
+package com.tavisca.workshops.second.httpServer;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,15 +27,15 @@ public class Header {
         this(DEFAULT_PROTOCOL, DEFAULT_STATUS_CODE, contentLength, DEFAULT_MIME_TYPE);
     }
 
-    public Header(int contentLength, String mimeType){
+    Header(int contentLength, String mimeType){
         this(DEFAULT_PROTOCOL, DEFAULT_STATUS_CODE, contentLength, mimeType);
     }
 
-    public Header(String protocol, int statusCode, int contentLength, String mimeType) {
+    private Header(String protocol, int statusCode, int contentLength, String mimeType) {
         this(protocol, statusCode, new Date(), contentLength, mimeType);
     }
 
-    public Header(String protocol, int statusCode, Date date, int contentLength, String mimeType) {
+    private Header(String protocol, int statusCode, Date date, int contentLength, String mimeType) {
         this.protocol = protocol;
         this.mimeType = mimeType;
         this.statusCode = statusCode;
@@ -44,7 +44,7 @@ public class Header {
     }
 
     public String toString() {
-        String header = protocol + " " + statusCode + " " + statusCodeToStringMap.get(statusCode) + "\n" +
+        return protocol + " " + statusCode + " " + statusCodeToStringMap.get(statusCode) + "\n" +
                 "Date: " +
                 getDateTimeString()
                 + "\n" +
@@ -52,14 +52,13 @@ public class Header {
                 "Content-Length: " + contentLength + '\n' +
                 "Connection: Closed\n" +
                 "Content-Type: " + mimeType + "\n\n";
-        return header;
     }
 
-    public byte[] getBytes() {
+    byte[] getBytes() {
         return toString().getBytes();
     }
 
-    public byte[] fileNotFound() {
+    byte[] fileNotFound() {
         statusCode = 404;
         return getBytes();
     }
@@ -69,7 +68,7 @@ public class Header {
         return getBytes();
     }
 
-    public byte[] serverError() {
+    byte[] serverError() {
         statusCode = 400;
         return getBytes();
     }

@@ -2,8 +2,6 @@ package com.tavisca.workshops.second.httpServer;
 
 import com.tavisca.workshops.second.httpServer.exception.InaccessibleFileException;
 import com.tavisca.workshops.second.httpServer.exception.InvalidResourceFormatException;
-import com.tavisca.workshops.second.httpServer.model.Header;
-import com.tavisca.workshops.second.httpServer.model.Request;
 import com.tavisca.workshops.second.httpServer.util.FileHandler;
 
 import java.io.FileNotFoundException;

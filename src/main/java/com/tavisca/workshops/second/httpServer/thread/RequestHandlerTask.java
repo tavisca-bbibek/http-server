@@ -4,8 +4,8 @@ import com.tavisca.workshops.second.httpServer.RequestParser;
 import com.tavisca.workshops.second.httpServer.ErrorData;
 import com.tavisca.workshops.second.httpServer.Response;
 import com.tavisca.workshops.second.httpServer.exception.RequestParseException;
-import com.tavisca.workshops.second.httpServer.model.Header;
-import com.tavisca.workshops.second.httpServer.model.Request;
+import com.tavisca.workshops.second.httpServer.Header;
+import com.tavisca.workshops.second.httpServer.Request;
 import com.tavisca.workshops.second.httpServer.model.RequestMethod;
 
 import java.io.*;
