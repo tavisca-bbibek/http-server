@@ -28,7 +28,7 @@ public class ErrorData {
         return content;
     }
 
-    private static byte[] serverError() {
+    static byte[] serverError() {
         byte[] content;
         try {
             content = FileHandler.readFile(FILE_SERVER_ERROR);

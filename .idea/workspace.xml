@@ -2,11 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c37b4b77-748d-4a84-9838-5e109796612c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/tavisca/workshops/second/httpServer/ErrorDataTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/jarAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/results.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/results.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/tavisca/workshops/second/httpServer/ErrorData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tavisca/workshops/second/httpServer/ErrorData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tavisca/workshops/second/httpServer/Header.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tavisca/workshops/second/httpServer/Header.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tavisca/workshops/second/httpServer/Response.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tavisca/workshops/second/httpServer/Response.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tavisca/workshops/second/httpServer/thread/RequestHandlerTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tavisca/workshops/second/httpServer/thread/RequestHandlerTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/tavisca/workshops/second/httpServer/RequestParserTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/tavisca/workshops/second/httpServer/RequestParserTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/tavisca/workshops/second/httpServer/util/ResourcePathParserTest.java" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -40,9 +52,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="JUnit5 Test Class" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -65,6 +77,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.tavisca.workshops.second.httpServer" />
       <recent name="com.tavisca.workshops.second.httpserver.util" />
       <recent name="com.tavisca.workshops.second.httpserver" />
     </key>
@@ -84,7 +97,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Server">
+  <component name="RunManager" selected="Gradle.ErrorDataTest.canReturnFileNotFoundData">
     <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.tavisca.workshops.second.httpServer.Server" />
       <module name="HttpServer.main" />
@@ -98,12 +111,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FileHandlerTest.canReadContentsOfTheFile" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="ErrorDataTest.canReturnFileNotFoundData" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;com.tavisca.workshops.second.httpserver.util.FileHandlerTest.canReadContentsOfTheFile&quot;" />
+        <option name="scriptParameters" value="--tests &quot;com.tavisca.workshops.second.httpServer.ErrorDataTest.canReturnFileNotFoundData&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -138,12 +151,12 @@
       <GradleScriptDebugEnabled>false</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="HttpRequestParserTest.canParseRequest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="RequestParserTest.canParseRequest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;com.tavisca.workshops.second.httpserver.HttpRequestParserTest.canParseRequest&quot;" />
+        <option name="scriptParameters" value="--tests &quot;com.tavisca.workshops.second.httpServer.RequestParserTest.canParseRequest&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -180,11 +193,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.ErrorDataTest.canReturnFileNotFoundData" />
+        <item itemvalue="Gradle.RequestParserTest.canParseRequest" />
         <item itemvalue="Gradle.HeaderGeneratorTest.canGenerateHeaderWithOKStatus" />
         <item itemvalue="Application.Server" />
         <item itemvalue="Gradle.ResourceHandlerTest.canExtractExtensionFromResourceString" />
-        <item itemvalue="Gradle.HttpRequestParserTest.canParseRequest" />
-        <item itemvalue="Gradle.FileHandlerTest.canReadContentsOfTheFile" />
       </list>
     </recent_temporary>
   </component>
@@ -304,7 +317,14 @@
       <option name="project" value="LOCAL" />
       <updated>1564904667754</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Done with logging.">
+      <created>1564906081719</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1564906081719</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -336,7 +356,8 @@
     <MESSAGE value="Fixed it" />
     <MESSAGE value="Obsessive cleanup" />
     <MESSAGE value="to log server events to logs/" />
-    <option name="LAST_COMMIT_MESSAGE" value="to log server events to logs/" />
+    <MESSAGE value="Done with logging." />
+    <option name="LAST_COMMIT_MESSAGE" value="Done with logging." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/HttpServer$Server.ic" NAME="Server Coverage Results" MODIFIED="1564725708864" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
