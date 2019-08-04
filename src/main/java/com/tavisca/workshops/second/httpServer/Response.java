@@ -19,6 +19,11 @@ public class Response {
 
     public Response(Request request) {
         this.request = request;
+        if (request.getResourcePath().isEmpty()) {
+            request.setResourcePath(request.getResourcePath() + "/" + FILE_DEFAULT);
+        } else if (!request.getResourcePath().matches(PATTERN_FILE_PATH)) {
+            request.setResourcePath(request.getResourcePath() + "/" + FILE_DEFAULT);
+        }
         initialize();
     }
 
@@ -28,17 +33,10 @@ public class Response {
     }
 
     private void initialize() {
-        String resourcePath = request.getResourcePath();
-        if (resourcePath.isEmpty()) {
-            request.setResourcePath(FILE_DEFAULT);
-            initialize();
-        } else if (!resourcePath.matches(PATTERN_FILE_PATH)) {
-            request.setResourcePath(resourcePath + "/" + FILE_DEFAULT);
-            initialize();
-        }
         try {
             try {
-                body = FileHandler.readFile(resourcePath);
+                body = FileHandler.readFile(request.getResourcePath());
+                String h = new Header(body.length, request.getMimeType()).toString();
                 header = new Header(body.length, request.getMimeType()).getBytes();
             } catch (InvalidResourceFormatException e) {
                 body = ErrorData.clientError();

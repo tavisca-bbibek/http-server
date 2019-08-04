@@ -8,14 +8,14 @@ import java.util.TimeZone;
 public class Header {
 
     private static final String HEADER_DATE_FORMAT = "EEE, d MMM yyyy HH:mm:ss z";
-    public static final int DEFAULT_STATUS_CODE = 200;
+    private static final int DEFAULT_STATUS_CODE = 200;
     private static final Map<Integer, String> statusCodeToStringMap = Map.of(
             200, "OK",
             400, "Bad Request",
             404, "Not Found",
             500, "Internal Server Error");
-    public static final String DEFAULT_PROTOCOL = "HTTP/1.1";
-    public static final String DEFAULT_MIME_TYPE = "text/html";
+    private static final String DEFAULT_PROTOCOL = "HTTP/1.1";
+    private static final String DEFAULT_MIME_TYPE = "text/html";
 
     private String protocol;
     private int statusCode;

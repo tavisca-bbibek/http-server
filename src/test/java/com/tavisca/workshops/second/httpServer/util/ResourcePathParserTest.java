@@ -8,15 +8,4 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ResourcePathParserTest {
 
-    @Test
-    void canExtractExtensionFromResourceString() {
-        String extension = null;
-        try {
-            extension = ResourcePathParser.parseExtension("www/resources/image.jpeg");
-            assertEquals("jpeg", extension);
-        } catch (InvalidResourceFormatException e) {
-            fail();
-        }
-    }
-
 }
