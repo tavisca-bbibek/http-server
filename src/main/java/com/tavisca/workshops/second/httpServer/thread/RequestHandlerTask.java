@@ -10,8 +10,10 @@ import com.tavisca.workshops.second.httpServer.model.RequestMethod;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.logging.Logger;
 
 public class RequestHandlerTask implements Runnable {
+    private final Logger logger = Logger.getLogger("com.tavisca.workshops.second.httpServer.RequestHandlerTask");
     Socket client;
 
     public RequestHandlerTask(Socket client) {
@@ -44,7 +46,10 @@ public class RequestHandlerTask implements Runnable {
         int size = requestStream.available();
         byte[] buffer = new byte[size];
         requestStream.readNBytes(buffer, 0, size);
-        //TODO:log when buffer is null.
+
+        if (buffer.length == 0)
+            logger.severe(Thread.currentThread().getName() + " - Buffer is null");
+
         return new String(buffer);
     }
 
@@ -63,7 +68,7 @@ public class RequestHandlerTask implements Runnable {
             Response response = new Response(header, body);
             responseStream.write(response.getBytes());
             responseStream.flush();
-            //TODO: Log client error.
+            logger.warning(Thread.currentThread().getName() + " - couldn't understand request - " + header.toString());
         } finally {
             responseStream.close();
         }

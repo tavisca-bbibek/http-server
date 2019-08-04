@@ -9,7 +9,7 @@ import java.nio.ByteBuffer;
 import java.util.logging.Logger;
 
 public class Response {
-    private static final Logger logger = Logger.getLogger("com.tavisca.workshops.second.httpServer.Response");
+    private  final Logger logger = Logger.getLogger("com.tavisca.workshops.second.httpServer.Response");
     private static final String PATTERN_FILE_PATH = "(.*)\\.(.*)$";
     private static final String FILE_DEFAULT = "index.html";
 
