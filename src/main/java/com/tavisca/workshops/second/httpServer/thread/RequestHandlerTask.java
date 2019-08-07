@@ -68,7 +68,9 @@ public class RequestHandlerTask implements Runnable {
             Response response = new Response(header, body);
             responseStream.write(response.getBytes());
             responseStream.flush();
-            logger.warning(Thread.currentThread().getName() + " - couldn't understand request - " + header.toString());
+            logger.warning(Thread.currentThread().getName() + " - couldn't understand request - "
+                    + requestString + " - response header -"
+                    + header.toString());
         } finally {
             responseStream.close();
         }

@@ -19,7 +19,7 @@ public class ErrorData {
         try {
             content = FileHandler.readFile(FILE_FILE_NOT_FOUND);
         } catch (FileNotFoundException e) {
-            logger.severe(Thread.currentThread().getName() + "Cant find - " + FILE_FILE_NOT_FOUND);
+            logger.info(Thread.currentThread().getName() + "Cant find - " + FILE_FILE_NOT_FOUND);
             return serverError();
         }catch (InaccessibleFileException e) {
             logger.severe(Thread.currentThread().getName() + "Cant access - " + FILE_FILE_NOT_FOUND);

@@ -28,19 +28,20 @@ public class Server {
         }
     }
 
-    private ServerSocket server = null;
+    private ServerSocket serverSocket = null;
     private static Server instance = null;
 
     private Server() {
         try {
-            server = new ServerSocket(PORT);
+            serverSocket = new ServerSocket(PORT);
             logger.fine("Server started");
         } catch (IOException e) {
             logger.severe("Can't start server - " + e.toString());
         }
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
+
         ExecutorService threadPool = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
         while (true) {
             try {
@@ -54,13 +55,13 @@ public class Server {
         }
     }
 
-    private static Server getInstance() {
+    static Server getInstance() {
         if (instance == null)
             instance = new Server();
         return instance;
     }
 
     private Socket acceptRequest() throws IOException {
-        return server.accept();
+        return serverSocket.accept();
     }
 }
