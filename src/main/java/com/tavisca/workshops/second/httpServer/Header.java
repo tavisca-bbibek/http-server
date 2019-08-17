@@ -1,19 +1,21 @@
 package com.tavisca.workshops.second.httpServer;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Map;
-import java.util.TimeZone;
+import java.util.*;
 
 public class Header {
 
     private static final String HEADER_DATE_FORMAT = "EEE, d MMM yyyy HH:mm:ss z";
     private static final int DEFAULT_STATUS_CODE = 200;
-    private static final Map<Integer, String> statusCodeToStringMap = Map.of(
-            200, "OK",
-            400, "Bad Request",
-            404, "Not Found",
-            500, "Internal Server Error");
+    private static final Map<Integer, String> statusCodeToStringMap = Collections.unmodifiableMap(
+            new HashMap<Integer, String>() {{
+                        put(200, "OK");
+                        put(400, "Bad Request");
+                        put(404, "Not Found");
+                        put(500, "Internal Server Error");
+            }}
+
+    );
     private static final String DEFAULT_PROTOCOL = "HTTP/1.1";
     private static final String DEFAULT_MIME_TYPE = "text/html";
 
@@ -27,7 +29,7 @@ public class Header {
         this(DEFAULT_PROTOCOL, DEFAULT_STATUS_CODE, contentLength, DEFAULT_MIME_TYPE);
     }
 
-    Header(int contentLength, String mimeType){
+    Header(int contentLength, String mimeType) {
         this(DEFAULT_PROTOCOL, DEFAULT_STATUS_CODE, contentLength, mimeType);
     }
 

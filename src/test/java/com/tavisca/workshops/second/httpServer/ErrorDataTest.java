@@ -1,13 +1,9 @@
 package com.tavisca.workshops.second.httpServer;
 
-import com.tavisca.workshops.second.httpServer.exception.InaccessibleFileException;
-import com.tavisca.workshops.second.httpServer.util.FileHandler;
 import org.junit.jupiter.api.Test;
 import static org.junit.Assert.fail;
 
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,7 +13,7 @@ class ErrorDataTest {
     @Test
     void canReturnFileNotFoundData() {
         try {
-            byte[] expected = new FileInputStream("www/responses/fileNotFound.html").readAllBytes();
+            byte[] expected = readAllBytes(new FileInputStream("www/responses/fileNotFound.html"));
             assertArrayEquals(expected, ErrorData.fileNotFound());
         } catch (IOException e) {
            fail();
@@ -27,7 +23,7 @@ class ErrorDataTest {
     @Test
     void canReturnServerErrorFoundData() {
         try {
-            byte[] expected = new FileInputStream("www/responses/serverError.html").readAllBytes();
+            byte[] expected = readAllBytes(new FileInputStream("www/responses/serverError.html"));
             assertArrayEquals(expected, ErrorData.serverError());
         } catch (IOException e) {
             fail();
@@ -37,11 +33,18 @@ class ErrorDataTest {
     @Test
     void canReturnClientErrorFoundData() {
         try {
-            byte[] expected = new FileInputStream("www/responses/clientError.html").readAllBytes();
+            byte[] expected = readAllBytes(new FileInputStream("www/responses/clientError.html"));
             assertArrayEquals(expected, ErrorData.clientError());
         } catch (IOException e) {
             fail();
         }
+    }
+
+    private static byte[] readAllBytes(FileInputStream fileInputStream) throws IOException{
+        int size = fileInputStream.available();
+        byte[] contents = new byte[size];
+        fileInputStream.read(contents, 0, size);
+        return contents;
     }
 
 }

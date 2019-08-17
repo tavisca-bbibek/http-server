@@ -13,6 +13,7 @@ import java.net.Socket;
 import java.util.logging.Logger;
 
 public class RequestHandlerTask implements Runnable {
+    private static final int BUFFER_SIZE = 128;
     private final Logger logger = Logger.getLogger("com.tavisca.workshops.second.httpServer.RequestHandlerTask");
     Socket client;
 
@@ -44,13 +45,14 @@ public class RequestHandlerTask implements Runnable {
 
     private String readRequest(InputStream requestStream) throws IOException {
         int size = requestStream.available();
-        byte[] buffer = new byte[size];
-        requestStream.readNBytes(buffer, 0, size);
+        char[] requestData = new char[size];
+        InputStreamReader requestStreamReader = new InputStreamReader(requestStream);
+        requestStreamReader.read(requestData, 0, size);
 
-        if (buffer.length == 0)
+        if (requestData.length == 0)
             logger.severe(Thread.currentThread().getName() + " - Buffer is null");
 
-        return new String(buffer);
+        return new String(requestData);
     }
 
     private void writeResponse(String requestString, OutputStream responseStream) throws IOException {
