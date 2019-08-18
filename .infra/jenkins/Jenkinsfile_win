@@ -1,0 +1,39 @@
+pipeline {
+    agent {label "Windows_Machine"}
+    stages {
+        stage("Build") {
+           steps {
+               bat label: '', script: 'gradlew.bat jar'
+           }
+        }
+
+        stage("Test") {
+           steps {
+               bat label: '', script: 'gradlew.bat test'
+           }
+        }
+
+        stage("Static Code Analysis") {
+           steps {
+               echo "TODO: Analyse Static code"
+           }
+        }
+
+        stage("Create Docker Image") {
+           steps {
+               bat label: '', script: '''
+                docker build -f ".infra/docker/Dockerfile" -t httpserver:v0.0 . 
+               '''
+           }
+        }
+
+        stage("Publish Docker Image") {
+           steps {
+               bat label: '', script: '''
+                docker tag httpserver:v0.0 httpserver
+                docker push bibekbc4/httpserver
+               '''
+           }
+        }
+    }
+}
