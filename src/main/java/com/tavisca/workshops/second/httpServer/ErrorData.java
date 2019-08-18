@@ -10,9 +10,9 @@ public class ErrorData {
     private static final Logger logger = Logger.getLogger("com.tavisca.workshops.second.httpServer.ErrorData");
 
     private static final String MESSAGE_FILE_MISSING = "Server file missing";
-    private static final String FILE_FILE_NOT_FOUND = "responses/fileNotFound.html";
-    private static final String FILE_SERVER_ERROR = "responses/serverError.html";
-    private static final String FILE_CLIENT_ERROR = "responses/clientError.html";
+    private static final String FILE_FILE_NOT_FOUND = "errorPages/HTTP404.html";
+    private static final String FILE_SERVER_ERROR = "errorPages/HTTP500.html";
+    private static final String FILE_CLIENT_ERROR = "errorPages/HTTP400.html";
 
     static byte[] fileNotFound() {
         byte[] content;

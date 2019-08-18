@@ -13,7 +13,7 @@ class ErrorDataTest {
     @Test
     void canReturnFileNotFoundData() {
         try {
-            byte[] expected = readAllBytes(new FileInputStream("www/responses/fileNotFound.html"));
+            byte[] expected = readAllBytes(new FileInputStream("www/errorPages/HTTP404.html"));
             assertArrayEquals(expected, ErrorData.fileNotFound());
         } catch (IOException e) {
            fail();
@@ -23,7 +23,7 @@ class ErrorDataTest {
     @Test
     void canReturnServerErrorFoundData() {
         try {
-            byte[] expected = readAllBytes(new FileInputStream("www/responses/serverError.html"));
+            byte[] expected = readAllBytes(new FileInputStream("www/errorPages/HTTP500.html"));
             assertArrayEquals(expected, ErrorData.serverError());
         } catch (IOException e) {
             fail();
@@ -33,7 +33,7 @@ class ErrorDataTest {
     @Test
     void canReturnClientErrorFoundData() {
         try {
-            byte[] expected = readAllBytes(new FileInputStream("www/responses/clientError.html"));
+            byte[] expected = readAllBytes(new FileInputStream("www/errorPages/HTTP400.html"));
             assertArrayEquals(expected, ErrorData.clientError());
         } catch (IOException e) {
             fail();

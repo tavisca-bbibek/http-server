@@ -2,6 +2,14 @@ plugins {
     id 'java'
 }
 
+jar {
+    manifest{
+        attributes(
+                'Main-Class': 'com.tavisca.workshops.second.httpServer.Server'
+        )
+    }
+}
+
 group 'com.tavisca.workshops.second'
 version '1.0-SNAPSHOT'
 
