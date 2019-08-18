@@ -30,7 +30,7 @@ pipeline {
         stage("Publish Docker Image") {
            steps {
                bat label: '', script: '''
-                docker tag httpserver:v0.0 httpserver
+                docker tag httpserver:v0.0 bibekbc4/httpserver
                 docker push bibekbc4/httpserver
                '''
            }
