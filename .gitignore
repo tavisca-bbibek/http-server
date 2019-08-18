@@ -1,8 +1,0 @@
-.gradle/
-.idea/
-.classpath/
-/target
-/**/*.class
-/**/*.swp
-build/
-logs/
