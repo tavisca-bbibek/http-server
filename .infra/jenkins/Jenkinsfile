@@ -37,16 +37,16 @@ pipeline {
            steps {
                sh label: '', script: '''
                 docker build -f ".infra/docker/Dockerfile" -t httpserver:v0.0 . 
+                docker tag httpserver:v0.0 bibekbc4/httpserver
                '''
            }
         }
 
         stage("Publish Docker Image") {
            steps {
-               sh label: '', script: '''
-                docker tag httpserver:v0.0 bibekbc4/httpserver
-                docker push bibekbc4/httpserver
-               '''
+               withDockerRegistry([ credentialsId: "dockerhub" , url:""]) {
+                sh 'docker push bibekbc4/httpserver'
+                }       
            }
         }
     } 
