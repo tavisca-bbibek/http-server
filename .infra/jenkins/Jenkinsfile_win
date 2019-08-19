@@ -14,9 +14,7 @@ pipeline {
         }
 
         stage("Static Code Analysis") {
-           steps {
-               echo "TODO: Analyse Static code"
-           }
+            
         }
 
         stage("Create Docker Image") {
@@ -34,6 +32,11 @@ pipeline {
                 docker push bibekbc4/httpserver
                '''
            }
+        }
+    }
+    post {
+        always {
+            deleteDir()
         }
     }
 }

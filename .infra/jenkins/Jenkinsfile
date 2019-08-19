@@ -1,15 +1,25 @@
 pipeline {
+    environment {
+        registry = "bibekbc4/httpserver"
+        registryCredential = ‘dockerhub’
+  }
     agent any
     stages {
         stage("Build") {
            steps {
-              sh label: '', script: './gradlew jar'
+              sh label: '', script: '''
+              chmod +x gradlew
+              ./gradlew jar
+              '''
            }
         }
 
         stage("Test") {
            steps {
-               sh label: '', script: './gradlew test'
+               sh label: '', script: '''
+              chmod +x gradlew
+              ./gradlew test
+              '''
            }
         }
 
@@ -34,6 +44,11 @@ pipeline {
                 docker push bibekbc4/httpserver
                '''
            }
+        }
+    } 
+    post {
+        always {
+            deleteDir()
         }
     }
 }
