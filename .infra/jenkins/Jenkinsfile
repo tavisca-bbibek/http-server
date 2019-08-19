@@ -1,7 +1,7 @@
 pipeline {
     environment {
         registry = "bibekbc4/httpserver"
-        registryCredential = ‘dockerhub’
+        registryCredential = "dockerhub"
   }
     agent any
     stages {
