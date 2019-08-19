@@ -36,6 +36,7 @@ pipeline {
         stage("Publish Docker Image") {
            steps {
                sh label: '', script: '''
+                docker login -u bibekbc4 -p zaq1ZAQ!zaq1 dockerio
                 docker tag httpserver:v0.0 bibekbc4/httpserver
                 docker push bibekbc4/httpserver
                '''
@@ -44,6 +45,7 @@ pipeline {
     } 
     post {
         always {
+            sh label: '', script: 'docker logout'
             deleteDir()
         }
     }
