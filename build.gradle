@@ -2,6 +2,10 @@ plugins {
     id 'java'
 }
 
+plugins {
+  id "org.sonarqube" version "2.7"
+}
+
 jar {
     manifest{
         attributes(

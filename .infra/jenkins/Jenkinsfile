@@ -1,0 +1,60 @@
+pipeline {
+    environment {
+        registry = "bibekbc4/httpserver"
+        registryCredential = "dockerhub"
+     }
+    agent any
+    stages {
+        stage("Build") {
+           steps {
+              sh label: '', script: '''
+              chmod +x gradlew
+              ./gradlew jar
+              '''
+           }
+        }
+
+        stage("Test") {
+           steps {
+               sh label: '', script: '''
+              chmod +x gradlew
+              ./gradlew test
+              '''
+           }
+        }
+
+        stage("Static Code Analysis") {
+           steps {
+               sh label: '', script: '''
+                ./gradlew sonarqube \
+                -Dsonar.projectKey=alter \
+                -Dsonar.organization=bibekbc4 \
+                -Dsonar.host.url=https://sonarcloud.io \
+                -Dsonar.login=04db1fff222318dc0122acadc0059202ae3a7c3e
+               '''
+           }
+        }
+
+        stage("Create Docker Image") {
+           steps {
+               sh label: '', script: '''
+                docker build -f ".infra/docker/Dockerfile" -t httpserver:v0.0 . 
+                docker tag httpserver:v0.0 bibekbc4/httpserver
+               '''
+           }
+        }
+
+        stage("Publish Docker Image") {
+           steps {
+               withDockerRegistry([ credentialsId: "dockerhub" , url:""]) {
+                sh 'docker push bibekbc4/httpserver'
+                }       
+           }
+        }
+    } 
+    post {
+        always {
+            deleteDir()
+        }
+    }
+}
