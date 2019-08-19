@@ -36,7 +36,7 @@ pipeline {
         stage("Publish Docker Image") {
            steps {
                sh label: '', script: '''
-                docker login -u bibekbc4 -p zaq1ZAQ!zaq1 dockerio
+                docker login -u bibekbc4 -p zaq1ZAQ!zaq1 docker.io
                 docker tag httpserver:v0.0 bibekbc4/httpserver
                 docker push bibekbc4/httpserver
                '''
