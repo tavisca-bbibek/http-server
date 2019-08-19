@@ -1,8 +1,4 @@
 pipeline {
-    environment {
-        registry = "bibekbc4/httpserver"
-        registryCredential = "dockerhub"
-  }
     agent any
     stages {
         stage("Build") {
